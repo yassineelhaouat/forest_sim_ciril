@@ -14,8 +14,8 @@ public class SimulationRunner {
   }
 
   public void runSimulation() {
-    Forest forest = new Forest(configLoader.getForestWidth(), configLoader.getForestHeight());
-    forest.initializeFires(forest, configLoader.getInitialFirePositions());
+    Forest forest = new Forest(configLoader.getForestHeight(), configLoader.getForestWidth());
+    forest.initializeFires(configLoader.getInitialFirePositions());
 
     FireBehavior fireBehavior = new FireBehavior(forest, configLoader.getPropagationProbability());
     Simulation simulation = new Simulation(forest, fireBehavior, view);

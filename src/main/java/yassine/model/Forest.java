@@ -14,7 +14,7 @@ public class Forest {
 
 
 
-
+  //Initializes all grid with TREE cells
   private Cell[][] initializeGrid() {
     Cell[][] grid = new Cell[height][width];
     for (int i = 0; i < height; i++) {
@@ -25,11 +25,12 @@ public class Forest {
     return grid;
   }
   
-  public void initializeFires(Forest forest, int[][] firePositions) {
+  // Initializes fire cells at given positions
+  public void initializeFires(int[][] firePositions) {
     for (int[] pos : firePositions) {
       int i = pos[0];
       int j = pos[1];
-      if (forest.isValidPosition(i, j)) forest.setFire(i, j);
+      if (isValidPosition(i, j)) setFire(i, j);
     }
   }
 
@@ -60,6 +61,10 @@ public class Forest {
     }
   }
 
+  /*
+   * 
+   * Checks if coords are within defined grid bounds
+   */
   public boolean isValidPosition(int i, int j) {
     return i >= 0 && i < height && j >= 0 && j < width;
   }
