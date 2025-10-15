@@ -7,12 +7,13 @@ import yassine.model.CellState;
 import yassine.model.Forest;
 
 public class FireBehavior {
-  private Forest forest;
-  private double propagationProbability = 0.5;
+  private static final int[][] DIRECTIONS = {
+    {-1, 0}, {1, 0}, {0, -1}, {0, 1}
+  };
 
-  public FireBehavior(Forest forest) {
-    this.forest = forest;
-  }
+  private final Forest forest;
+  private final double propagationProbability;
+
 
   public FireBehavior(Forest forest, double propagationProbability) {
     this.forest = forest;
@@ -44,29 +45,23 @@ public class FireBehavior {
     }
   }
 
-  private void spreadToNeighbors(int i, int j, List<int[]> cellsToBurn) {
-    int[][] coords = {{i - 1, j}, {i + 1, j}, {i, j - 1}, {i, j + 1}};
-
-    for (int[] pos : coords) {
-      int x = pos[0];
-      int y = pos[1];
-
-      if (forest.isValidPosition(x, y)
-          && forest.getCellState(x, y) == CellState.TREE
-          && Math.random() < this.propagationProbability) {
-        cellsToBurn.add(new int[] {x, y});
-      }
-    }
-  }
-
-  public boolean noFireLeft() {
-    for (int i = 0; i < forest.getHeight(); i++) {
-      for (int j = 0; j < forest.getWidth(); j++) {
-        if (forest.getCellState(i, j) == CellState.FIRE) {
-          return false;
+    private void spreadToNeighbors(int i, int j, List<int[]> cellsToBurn) {
+        for (int[] d : DIRECTIONS) {
+            int neighbor_i = i + d[0];
+            int neighbor_j = j + d[1];
+            
+            if (canSpreadTo(neighbor_i, neighbor_j)) {
+                cellsToBurn.add(new int[] {neighbor_i, neighbor_j});
+            }
         }
-      }
+    }    
+    private boolean canSpreadTo(int row, int col) {
+        return forest.isValidPosition(row, col)
+            && forest.getCellState(row, col) == CellState.TREE
+            && Math.random() < propagationProbability;
     }
-    return true;
+
+  public boolean hasFireLeft() {
+    return forest.countCellsByState(CellState.FIRE) > 0;
   }
 }

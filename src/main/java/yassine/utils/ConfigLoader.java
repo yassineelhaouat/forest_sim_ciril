@@ -37,7 +37,7 @@ public class ConfigLoader {
     
     public int getForestWidth() {
         String value = properties.getProperty("forest.width");
-        return ConfigParser.getPositiveInt(value, "forest.height"
+        return ConfigParser.getPositiveInt(value, "forest.width"
             
         );
     }

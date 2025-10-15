@@ -5,29 +5,31 @@ public class Forest {
   private int height;
   private int width;
 
-  public Forest(int height, int width, int[][] firePositions) {
+  public Forest(int height, int width) {
     this.height = height;
     this.width = width;
-    this.grid = new Cell[height][width];
-    initializeGrid();
-    initializeFires(firePositions);
+    this.grid = initializeGrid();
 
   }
 
-  private void initializeGrid() {
+
+
+
+  private Cell[][] initializeGrid() {
+    Cell[][] grid = new Cell[height][width];
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
         grid[i][j] = new Cell(CellState.TREE);
       }
     }
+    return grid;
   }
-  private void initializeFires(int[][] firePositions) {
+  
+  public void initializeFires(Forest forest, int[][] firePositions) {
     for (int[] pos : firePositions) {
       int i = pos[0];
       int j = pos[1];
-      if (isValidPosition(i, j)) {
-        grid[i][j].setOnFire();
-      }
+      if (forest.isValidPosition(i, j)) forest.setFire(i, j);
     }
   }
 
@@ -52,10 +54,11 @@ public class Forest {
     return count;
   }
 
-
-
-
-
+  public void setFire(int i, int j) {
+    if (isValidPosition(i, j)) {
+      grid[i][j].setState(CellState.FIRE);
+    }
+  }
 
   public boolean isValidPosition(int i, int j) {
     return i >= 0 && i < height && j >= 0 && j < width;

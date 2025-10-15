@@ -1,14 +1,20 @@
 package yassine.view;
 
+import java.util.Arrays;
+
 import yassine.model.CellState;
 import yassine.model.Forest;
+import yassine.utils.ConfigLoader;
 
-public class ConsoleView {
+public class ConsoleView implements View {
 
+    @Override
    public void displayHeader() {
         System.out.println("Simulation feu de foret");
         System.out.println("======================");
     }
+
+    @Override
     public void displayForest(Forest forest) {
         for (int i = 0; i < forest.getHeight(); i++) {
             for (int j = 0; j < forest.getWidth(); j++) {
@@ -18,16 +24,22 @@ public class ConsoleView {
         }
     }
 
-    public void displayProperties(int height, int width, double probability, int[][] firePositions) {
-        System.out.println("Hauteur h: " + height);
-        System.out.println("Largeur l: " + width);
-        System.out.println("Probabilite: " + probability);
-        System.out.println("Positions initiales de feu: " + java.util.Arrays.deepToString(firePositions));
+    @Override
+    public void displayProperties(ConfigLoader config){
+        System.out.println("Hauteur: " + config.getForestHeight());
+        System.out.println("Largeur: " + config.getForestWidth());
+        System.out.println("Probabilite de propagation: " + config.getPropagationProbability());
+        System.out.println("Positions de feu initiales: " + Arrays.deepToString(config.getInitialFirePositions()));        System.out.println();
     }
+
+
+    @Override
     public void displayStep(int step) {
         System.out.println("Step " + step + ":");
     }
 
+
+    @Override
     public void displayStats(Forest forest) {
         int numOfFires = forest.countCellsByState(CellState.FIRE);
         if (numOfFires == 0) {
