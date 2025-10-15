@@ -1,21 +1,22 @@
 package yassine;
 
+import yassine.config.ConfigLoader;
 import yassine.logic.FireBehavior;
 import yassine.model.Forest;
 
 public class Main {
   public static void main(String[] args) {
-
-    int height = 5;
-    int width = 10;
-
-    int[][] firePositions = {
-      {0, 1},
-      {1, 2},
-      {2, 3}
-    };
+    ConfigLoader config = new ConfigLoader();
+    int height = config.getForestHeight();
+    int width = config.getForestWidth();
+    double propagationProbability = config.getPropagationProbability();
+    int[][] firePositions = config.getInitialFirePositions();
     
-    double propagationProbability = 0.5;
+System.out.println("Height: " + height);
+System.out.println("Width: " + width);
+System.out.println("Probability: " + propagationProbability);
+System.out.println("Fire positions: " + java.util.Arrays.deepToString(firePositions));
+System.out.println();
     Forest forest = new Forest(height, width, firePositions);
 
     for (int i = 0; i < forest.getHeight(); i++) {
