@@ -40,6 +40,22 @@ public class Forest {
     grid[i][j].setState(state);
   }
 
+  public int countCellsByState(CellState state) {
+    int count = 0;
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < width; j++) {
+        if (grid[i][j].getState() == state) {
+          count++;
+        }
+      }
+    }
+    return count;
+  }
+
+
+
+
+
 
   public boolean isValidPosition(int i, int j) {
     return i >= 0 && i < height && j >= 0 && j < width;

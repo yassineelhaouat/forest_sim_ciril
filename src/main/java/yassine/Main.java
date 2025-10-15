@@ -3,6 +3,7 @@ package yassine;
 import yassine.config.ConfigLoader;
 import yassine.logic.FireBehavior;
 import yassine.model.Forest;
+import yassine.view.ConsoleView;
 
 public class Main {
   public static void main(String[] args) {
@@ -12,41 +13,30 @@ public class Main {
     double propagationProbability = config.getPropagationProbability();
     int[][] firePositions = config.getInitialFirePositions();
     
-System.out.println("Height: " + height);
-System.out.println("Width: " + width);
-System.out.println("Probability: " + propagationProbability);
-System.out.println("Fire positions: " + java.util.Arrays.deepToString(firePositions));
-System.out.println();
+
     Forest forest = new Forest(height, width, firePositions);
+    FireBehavior simulation = new FireBehavior(forest, propagationProbability);
+    
+    
+    ConsoleView view = new ConsoleView();
 
-    for (int i = 0; i < forest.getHeight(); i++) {
-      for (int j = 0; j < forest.getWidth(); j++) {
-        System.out.print(forest.getCellState(i, j) + " ");
-      }
-      System.out.println();
+    view.displayHeader();
+    view.displayProperties(height, width, propagationProbability, firePositions);
+    view.displayForest(forest);
+    view.displayStats(forest);
+
+
+
+    int current = 0;
+    while(!simulation.noFireLeft()){
+        current++;
+        view.displayStep(current);
+        simulation.next();
+        view.displayForest(forest);
+        view.displayStats(forest);
     }
 
-    try {
-      Thread.sleep(1000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    FireBehavior fireBehavior = new FireBehavior(forest, propagationProbability);
-    while (!fireBehavior.noFireLeft()) {
-      fireBehavior.step();
-      System.out.println("Next Step:");
-      for (int i = 0; i < forest.getHeight(); i++) {
-        for (int j = 0; j < forest.getWidth(); j++) {
-          System.out.print(forest.getCellState(i, j) + " ");
-        }
-        System.out.println();
-      }
-
-      try {
-        Thread.sleep(1000);
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-    }
   }
+
+
 }

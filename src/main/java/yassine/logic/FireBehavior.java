@@ -8,7 +8,7 @@ import yassine.model.Forest;
 
 public class FireBehavior {
   private Forest forest;
-  double propagationProbability = 0.5;
+  private double propagationProbability = 0.5;
 
   public FireBehavior(Forest forest) {
     this.forest = forest;
@@ -19,7 +19,7 @@ public class FireBehavior {
     this.propagationProbability = propagationProbability;
   }
 
-  public void step() {
+  public void next() {
     List<int[]> cellsToBecomeAsh = new ArrayList<>();
     List<int[]> cellsToBurn = new ArrayList<>();
 
