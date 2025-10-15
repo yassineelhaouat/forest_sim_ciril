@@ -20,4 +20,10 @@ public class Cell {
             state = CellState.FIRE;
         }
     }
+
+    public void setToAsh() {
+        if (state == CellState.FIRE) {
+            state = CellState.ASH;
+        }
+    }
 }

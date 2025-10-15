@@ -21,6 +21,16 @@ public class Forest {
       }
     }
   }
+  private void initializeFires(int[][] firePositions) {
+    for (int[] pos : firePositions) {
+      int i = pos[0];
+      int j = pos[1];
+      if (isValidPosition(i, j)) {
+        grid[i][j].setOnFire();
+      }
+    }
+  }
+
 
   public CellState getCellState(int i, int j) {
     return grid[i][j].getState();
@@ -31,14 +41,8 @@ public class Forest {
   }
 
 
-  private void initializeFires(int[][] firePositions) {
-    for (int[] pos : firePositions) {
-      int i = pos[0];
-      int j = pos[1];
-      if (i >= 0 && i < height && j >= 0 && j < width) {
-        grid[i][j].setOnFire();
-      }
-    }
+  public boolean isValidPosition(int i, int j) {
+    return i >= 0 && i < height && j >= 0 && j < width;
   }
 
   public int getHeight() {
