@@ -14,7 +14,8 @@ public class Main {
       {1, 2},
       {2, 3}
     };
-
+    
+    double propagationProbability = 0.5;
     Forest forest = new Forest(height, width, firePositions);
 
     for (int i = 0; i < forest.getHeight(); i++) {
@@ -29,7 +30,7 @@ public class Main {
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
-    FireBehavior fireBehavior = new FireBehavior(forest);
+    FireBehavior fireBehavior = new FireBehavior(forest, propagationProbability);
     while (!fireBehavior.noFireLeft()) {
       fireBehavior.step();
       System.out.println("Next Step:");

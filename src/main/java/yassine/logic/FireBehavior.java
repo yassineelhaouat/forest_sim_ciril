@@ -8,9 +8,15 @@ import yassine.model.Forest;
 
 public class FireBehavior {
   private Forest forest;
+  double propagationProbability = 0.5;
 
   public FireBehavior(Forest forest) {
     this.forest = forest;
+  }
+
+  public FireBehavior(Forest forest, double propagationProbability) {
+    this.forest = forest;
+    this.propagationProbability = propagationProbability;
   }
 
   public void step() {
@@ -19,7 +25,7 @@ public class FireBehavior {
 
     for (int i = 0; i < forest.getHeight(); i++) {
       for (int j = 0; j < forest.getWidth(); j++) {
-        
+
         if (forest.getCellState(i, j) == CellState.FIRE) {
           cellsToBecomeAsh.add(new int[] {i, j});
 
@@ -45,8 +51,10 @@ public class FireBehavior {
       int x = pos[0];
       int y = pos[1];
 
-      if (forest.isValidPosition(x,y) && forest.getCellState(x,y) == CellState.TREE) {
-          cellsToBurn.add(new int[] {x,y});
+      if (forest.isValidPosition(x, y)
+          && forest.getCellState(x, y) == CellState.TREE
+          && Math.random() < this.propagationProbability) {
+        cellsToBurn.add(new int[] {x, y});
       }
     }
   }
