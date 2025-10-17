@@ -8,9 +8,6 @@
   <ol>
     <li>
       <a href="#à-propos-du-projet">À propos du projet</a>
-      <ul>
-        <li><a href="#technologies-utilisées">Technologies utilisées</a></li>
-      </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -20,7 +17,6 @@
       </ul>
     </li>
     <li><a href="#utilisation">Utilisation</a></li>
-    <li><a href="#architecture">Architecture</a></li>
     <li><a href="#tests">Tests</a></li>
     <li><a href="#améliorations-possibles">Améliorations possibles</a></li>
   </ol>
@@ -81,8 +77,8 @@ Nombre d'arbres: 43
 
 ### Prérequis
 
-* **Java 17 ou supérieur** 
-* **Maven**
+* **Java 8 ou supérieur**
+* **Maven - Optionnel (tests)**
 
 ### Installation
 

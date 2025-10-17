@@ -7,10 +7,15 @@ public enum CellState {
 
   @Override
   public String toString() {
-    return switch (this) {
-      case TREE -> "T";
-      case FIRE -> "F";
-      case ASH -> "A";
-    };
+    switch (this) {
+      case TREE:
+        return "T";
+      case FIRE:
+        return "F";
+      case ASH:
+        return "A";
+      default:
+        return "EMPTY";
+    }
   }
 }

@@ -16,13 +16,13 @@ public class Forest {
 
   //Initializes all grid with TREE cells
   private Cell[][] initializeGrid() {
-    Cell[][] grid = new Cell[height][width];
+    Cell[][] newGrid = new Cell[height][width];
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
-        grid[i][j] = new Cell(CellState.TREE);
+        newGrid[i][j] = new Cell(CellState.TREE);
       }
     }
-    return grid;
+    return newGrid;
   }
   
   // Initializes fire cells at given positions
@@ -56,9 +56,12 @@ public class Forest {
   }
 
   public void setFire(int i, int j) {
-    if (isValidPosition(i, j)) {
-      grid[i][j].setState(CellState.FIRE);
+    if (!isValidPosition(i, j)) {
+      throw new IllegalArgumentException(
+        "Fire position (" + i + "," + j + ") is out of bounds."
+      );
     }
+    grid[i][j].setState(CellState.FIRE);
   }
 
   /*

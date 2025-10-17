@@ -1,20 +1,26 @@
 package yassine.logic;
 
 import yassine.model.Forest;
+import yassine.utils.ConfigLoader;
 import yassine.view.View;
 
 public class Simulation {
     private final Forest forest;
     private final FireBehavior fireBehavior;
     private final View view;
+    private final ConfigLoader config;
 
-    public Simulation(Forest forest, FireBehavior fireBehavior, View view) {
-        this.forest = forest;
-        this.fireBehavior = fireBehavior;
+    public Simulation(ConfigLoader config, View view) {
+        this.config = config;
         this.view = view;
+        this.forest = new Forest(config.getForestHeight(), config.getForestWidth());
+        this.forest.initializeFires(config.getInitialFirePositions());
+        this.fireBehavior = new FireBehavior(forest, config.getPropagationProbability());
     }
 
     public void run() {
+        view.displayHeader();
+        view.displayProperties(config);
         view.displayForest(forest);
         view.displayStats(forest);
 

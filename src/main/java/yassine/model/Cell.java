@@ -14,16 +14,4 @@ public class Cell {
     public void setState(CellState state) {
         this.state = state;
     }
-
-    public void setOnFire() {
-        if (state == CellState.TREE) {
-            state = CellState.FIRE;
-        }
-    }
-
-    public void setToAsh() {
-        if (state == CellState.FIRE) {
-            state = CellState.ASH;
-        }
-    }
 }
