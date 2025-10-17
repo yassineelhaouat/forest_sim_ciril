@@ -50,17 +50,19 @@ T F T T T T T T T T
 T T F T T T T T T T
 T T T F T T T T T T
 T T T T T T T T T T
-Nombre de feu: 3
+Nombre de feux actifs: 3
 Nombre d'arbres: 47
+Nombre de cendres: 0
 
 Step 1:
 T A T T T T T T T T
-T A F T T T T T T T
+A F F T T T T T T T
 T F A F T T T T T T
 T T F A T T T T T T
 T T T T T T T T T T
-Nombre de feu: 4
-Nombre d'arbres: 43
+Nombre de feux actifs: 5
+Nombre d'arbres: 42
+Nombre de cendres: 3
 ```
 
 **Légende :**

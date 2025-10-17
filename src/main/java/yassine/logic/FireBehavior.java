@@ -1,10 +1,9 @@
 package yassine.logic;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import yassine.model.CellState;
 import yassine.model.Forest;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FireBehavior {
   /** directions for neighbor cells (left, right, down, up) */
@@ -20,46 +19,30 @@ public class FireBehavior {
 
   /** Checks for fire cells, spreads fire to valid neighbors, then turns fire cell to ash */
   public void next() {
-    List<int[]> cellsToBecomeAsh = new ArrayList<>();
-    List<int[]> cellsToBurn = new ArrayList<>();
-
+    List<int[]> fireCells = new ArrayList<>();
     for (int i = 0; i < forest.getHeight(); i++) {
       for (int j = 0; j < forest.getWidth(); j++) {
-
         if (forest.getCellState(i, j) == CellState.FIRE) {
-          cellsToBecomeAsh.add(new int[] {i, j});
-
-          spreadToNeighbors(i, j, cellsToBurn);
+          fireCells.add(new int[]{i, j});
         }
       }
     }
-
-    for (int[] pos : cellsToBecomeAsh) {
-      forest.setCellState(pos[0], pos[1], CellState.ASH);
-    }
-    for (int[] pos : cellsToBurn) {
-      if (forest.getCellState(pos[0], pos[1]) == CellState.TREE) {
-        forest.setCellState(pos[0], pos[1], CellState.FIRE);
-      }
+    
+    for (int[] cell : fireCells) {
+      spreadToNeighbors(cell[0], cell[1]);
+      forest.setCellState(cell[0], cell[1], CellState.ASH);
     }
   }
 
-  private void spreadToNeighbors(int i, int j, List<int[]> cellsToBurn) {
+  private void spreadToNeighbors(int i, int j) {
     for (int[] d : DIRECTIONS) {
       int neighbor_i = i + d[0];
       int neighbor_j = j + d[1];
 
-      if (canSpreadTo(neighbor_i, neighbor_j)) {
-        cellsToBurn.add(new int[] {neighbor_i, neighbor_j});
+      if (forest.isValidPosition(neighbor_i, neighbor_j) && forest.getCellState(neighbor_i, neighbor_j) == CellState.TREE && Math.random() < propagationProbability) {
+        forest.setCellState(neighbor_i, neighbor_j, CellState.FIRE);
       }
     }
-  }
-
-  /** defines if fire can spread to neighbors by probability */
-  private boolean canSpreadTo(int row, int col) {
-    return forest.isValidPosition(row, col)
-        && forest.getCellState(row, col) == CellState.TREE
-        && Math.random() < propagationProbability;
   }
 
   public boolean hasFireLeft() {

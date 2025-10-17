@@ -1,7 +1,7 @@
 package yassine.model;
 
 public class Forest {
-  private Cell[][] grid;
+  private CellState[][] grid;
   private int height;
   private int width;
 
@@ -15,11 +15,11 @@ public class Forest {
 
 
   //Initializes all grid with TREE cells
-  private Cell[][] initializeGrid() {
-    Cell[][] newGrid = new Cell[height][width];
+  private CellState[][] initializeGrid() {
+    CellState[][] newGrid = new CellState[height][width];
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
-        newGrid[i][j] = new Cell(CellState.TREE);
+        newGrid[i][j] = CellState.TREE;
       }
     }
     return newGrid;
@@ -36,18 +36,18 @@ public class Forest {
 
 
   public CellState getCellState(int i, int j) {
-    return grid[i][j].getState();
+    return grid[i][j];
   }
 
   public void setCellState(int i, int j, CellState state) {
-    grid[i][j].setState(state);
+    grid[i][j] = state;
   }
 
   public int countCellsByState(CellState state) {
     int count = 0;
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
-        if (grid[i][j].getState() == state) {
+        if (grid[i][j] == state) {
           count++;
         }
       }
@@ -61,7 +61,7 @@ public class Forest {
         "Fire position (" + i + "," + j + ") is out of bounds."
       );
     }
-    grid[i][j].setState(CellState.FIRE);
+    grid[i][j] = CellState.FIRE;
   }
 
   /*
