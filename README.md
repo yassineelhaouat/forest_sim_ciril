@@ -55,13 +55,13 @@ Nombre d'arbres: 47
 Nombre de cendres: 0
 
 Step 1:
-T A T T T T T T T T
-A F F T T T T T T T
+F A F T T T T T T T
 T F A F T T T T T T
-T T F A T T T T T T
+T T F A F T T T T T
 T T T T T T T T T T
-Nombre de feux actifs: 5
-Nombre d'arbres: 42
+T T T T T T T T T T
+Nombre total de feux actifs: 6
+Nombre d'arbres: 41
 Nombre de cendres: 3
 ```
 
@@ -79,12 +79,12 @@ Nombre de cendres: 3
 
 ### Prérequis
 
-* **Java 8 ou supérieur**
-* **Maven - Optionnel (tests)**
+* **Java 8 ou supérieur** 
+* **Maven**
 
 ### Installation
 
-1. Cloner le dépôt
+1. Cloner le repo
    ```sh
    git clone https://github.com/yassineelhaouat/forest_sim_ciril.git
    cd forest_sim_ciril
@@ -119,12 +119,6 @@ Nombre de cendres: 3
 mvn exec:java
 ```
 
-### Lancer les tests
-
-```sh
-mvn test
-```
-
 ### Générer un JAR exécutable
 
 ```sh
@@ -139,16 +133,16 @@ java -jar target/forest_sim_ciril-1.0-SNAPSHOT.jar
 
 ```sh
 mvn test
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 
 <!-- ROADMAP -->
 ## Améliorations Possibles
 
 - **Interface graphique**
-- **Obstacles**
-- **Optimisations**
+- **Ajout d'obstacles et de nouveaux paramètres**
+- **Optimisations pour grilles larges**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
